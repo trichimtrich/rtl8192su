@@ -526,7 +526,7 @@ bool rtl8821ae_rx_query_desc(struct ieee80211_hw *hw,
 	if (status->is_ht)
 		rx_status->encoding = RX_ENC_HT;
 	if (status->is_vht)
-		rx_status->flag |= RX_FLAG_VHT;
+		rx_status->encoding = RX_ENC_VHT;
 
 	if (status->is_short_gi)
 		rx_status->flag |= RX_FLAG_SHORT_GI;
