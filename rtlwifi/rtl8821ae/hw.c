@@ -1376,15 +1376,11 @@ static void _rtl8821ae_get_wakeup_reason(struct ieee80211_hw *hw)
 	switch (fw_reason) {
 	case FW_WOW_V2_PTK_UPDATE_EVENT:
 		ppsc->wakeup_reason = WOL_REASON_PTK_UPDATE;
-		do_gettimeofday(&ts);
-		ppsc->last_wakeup_time = ts.tv_sec*1000 + ts.tv_usec/1000;
 		RT_TRACE(rtlpriv, COMP_POWER, DBG_DMESG,
 			 "It's a WOL PTK Key update event!\n");
 		break;
 	case FW_WOW_V2_GTK_UPDATE_EVENT:
 		ppsc->wakeup_reason = WOL_REASON_GTK_UPDATE;
-		do_gettimeofday(&ts);
-		ppsc->last_wakeup_time = ts.tv_sec*1000 + ts.tv_usec/1000;
 		RT_TRACE(rtlpriv, COMP_POWER, DBG_DMESG,
 			 "It's a WOL GTK Key update event!\n");
 		break;
