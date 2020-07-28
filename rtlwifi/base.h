@@ -113,7 +113,7 @@ void rtl_init_rx_config(struct ieee80211_hw *hw);
 void rtl_init_rfkill(struct ieee80211_hw *hw);
 void rtl_deinit_rfkill(struct ieee80211_hw *hw);
 
-void rtl_watch_dog_timer_callback(unsigned long data);
+void rtl_watch_dog_timer_callback(struct timer_list *t);
 void rtl_deinit_deferred_work(struct ieee80211_hw *hw);
 
 bool rtl_action_proc(struct ieee80211_hw *hw, struct sk_buff *skb, u8 is_tx);

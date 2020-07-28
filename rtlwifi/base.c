@@ -458,8 +458,8 @@ static void _rtl_init_deferred_work(struct ieee80211_hw *hw)
 	struct rtl_priv *rtlpriv = rtl_priv(hw);
 
 	/* <1> timer */
-	setup_timer(&rtlpriv->works.watchdog_timer,
-		    rtl_watch_dog_timer_callback, (unsigned long)hw);
+	timer_setup(&rtlpriv->works.watchdog_timer,
+		    rtl_watch_dog_timer_callback, 0);
 	setup_timer(&rtlpriv->works.dualmac_easyconcurrent_retrytimer,
 		    rtl_easy_concurrent_retrytimer_callback, (unsigned long)hw);
 	/* <2> work queue */
@@ -1729,10 +1729,9 @@ void rtl_watchdog_wq_callback(void *data)
 	rtlpriv->link_info.bcn_rx_inperiod = 0;
 }
 
-void rtl_watch_dog_timer_callback(unsigned long data)
+void rtl_watch_dog_timer_callback(struct timer_list *t)
 {
-	struct ieee80211_hw *hw = (struct ieee80211_hw *)data;
-	struct rtl_priv *rtlpriv = rtl_priv(hw);
+	struct rtl_priv *rtlpriv = from_timer(rtlpriv, t, works.watchdog_timer);
 
 	queue_delayed_work(rtlpriv->works.rtl_wq,
 			   &rtlpriv->works.watchdog_wq, 0);
