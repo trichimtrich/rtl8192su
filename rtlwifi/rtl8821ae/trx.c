@@ -529,7 +529,7 @@ bool rtl8821ae_rx_query_desc(struct ieee80211_hw *hw,
 		rx_status->encoding = RX_ENC_VHT;
 
 	if (status->is_short_gi)
-		rx_status->flag |= RX_FLAG_SHORT_GI;
+		rx_status->enc_flags = RX_ENC_FLAG_SHORT_GI;
 
 	rx_status->vht_nss = status->vht_nss;
 	rx_status->flag |= RX_FLAG_MACTIME_START;
