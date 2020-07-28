@@ -520,7 +520,7 @@ bool rtl8821ae_rx_query_desc(struct ieee80211_hw *hw,
 		rx_status->flag |= RX_FLAG_FAILED_FCS_CRC;
 
 	if (status->rx_packet_bw == HT_CHANNEL_WIDTH_20_40)
-		rx_status->bw = RATE_INFO_BW_40;;
+		rx_status->bw = RATE_INFO_BW_40;
 	else if (status->rx_packet_bw == HT_CHANNEL_WIDTH_80)
 		rx_status->vht_flag |= RX_VHT_FLAG_80MHZ;
 	if (status->is_ht)
