@@ -933,14 +933,12 @@ static void rtl_op_configure_filter(struct ieee80211_hw *hw,
     if (changed_flags & FIF_PROMISC_IN_BSS) {
         if (*new_flags & FIF_PROMISC_IN_BSS) {
             mac->rx_conf |= rtlpriv->cfg->maps[MAC_RCR_AAP];
-            mac->rx_conf |= rtlpriv->cfg->maps[MAC_RCR_ACF];
             mac->rx_conf |= rtlpriv->cfg->maps[MAC_RCR_AM];
 
 
             printk("Enable accept all packets! PSP Xlink mode engaged!\n");
         } else {
             mac->rx_conf &= ~rtlpriv->cfg->maps[MAC_RCR_AAP];
-            mac->rx_conf &= ~rtlpriv->cfg->maps[MAC_RCR_ACF];
             mac->rx_conf &= ~rtlpriv->cfg->maps[MAC_RCR_AM];
             printk("Disable accept all packets, PSP Xlink mode disengaged.\n");
         }
