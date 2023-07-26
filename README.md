@@ -30,3 +30,17 @@ to load the module.
 This driver has been patched to support promiscious mode.
 This has been removed in newer kernel versions though, so you might need to patch your kernel with these patches:
 - https://gist.github.com/codedwrench/fa9304a399c7253eba821de0fceea3e5
+
+## Chim note
+
+- PROMISC defines are removed
+- Copy firmwares to the right place
+
+```
+make -j
+sudo make install_firmware
+sudo make load
+```
+
+- Making it persistent is trivial task for linux user : )
+

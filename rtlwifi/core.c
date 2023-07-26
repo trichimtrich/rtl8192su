@@ -888,18 +888,6 @@ static void rtl_op_configure_filter(struct ieee80211_hw *hw,
 	 * here just used for linked scanning, & linked
 	 * and nolink check bssid is set in set network_type
 	 */
-	if ((changed_flags & FIF_BCN_PRBRESP_PROMISC) &&
-	    (mac->link_state >= MAC80211_LINKED)) {
-		if (mac->opmode != NL80211_IFTYPE_AP &&
-		    mac->opmode != NL80211_IFTYPE_MESH_POINT) {
-			if (*new_flags & FIF_BCN_PRBRESP_PROMISC)
-				rtlpriv->cfg->ops->set_chk_bssid(hw, false);
-			else
-				rtlpriv->cfg->ops->set_chk_bssid(hw, true);
-			if (update_rcr)
-				update_rcr = false;
-		}
-	}
 
 	if (changed_flags & FIF_CONTROL) {
 		if (*new_flags & FIF_CONTROL) {
@@ -930,21 +918,6 @@ static void rtl_op_configure_filter(struct ieee80211_hw *hw,
 			update_rcr = true;
 	}
 
-    if (changed_flags & FIF_PROMISC_IN_BSS) {
-        if (*new_flags & FIF_PROMISC_IN_BSS) {
-            mac->rx_conf |= rtlpriv->cfg->maps[MAC_RCR_AAP];
-            mac->rx_conf |= rtlpriv->cfg->maps[MAC_RCR_AM];
-
-
-            printk("Enable accept all packets! PSP Xlink mode engaged!\n");
-        } else {
-            mac->rx_conf &= ~rtlpriv->cfg->maps[MAC_RCR_AAP];
-            mac->rx_conf &= ~rtlpriv->cfg->maps[MAC_RCR_AM];
-            printk("Disable accept all packets, PSP Xlink mode disengaged.\n");
-        }
-        if (!update_rcr)
-            update_rcr = true;
-    }
 
 	if (update_rcr)
 		rtlpriv->cfg->ops->set_hw_reg(hw, HW_VAR_RCR,

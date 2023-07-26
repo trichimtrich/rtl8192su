@@ -26,6 +26,11 @@ all:
 clean:
 	$(MAKE) -C $(KSRC) M=$(KMOD_SRC) clean $(KMOD_OPTIONS)
 
+
+install_firmware:
+	mkdir /lib/firmware/RTL8192SU
+	cp firmwares/* /lib/firmware/RTL8192SU/
+
 load:
 	modprobe mac80211
 	insmod $(KMOD_SRC)/rtlwifi.ko
