@@ -33,6 +33,7 @@ This has been removed in newer kernel versions though, so you might need to patc
 
 ## Chim note
 
+- Downgrade to kernel 5.15.xxx
 - PROMISC defines are removed
 - Copy firmwares to the right place
 
